@@ -19,4 +19,6 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.chatbot_view, name='chatbot_view'),
+    path('get-response/', views.get_response, name='get_response'),
 ]

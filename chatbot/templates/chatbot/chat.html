@@ -1,0 +1,26 @@
+<!-- chatbot/templates/chatbot/chat.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NBA Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>NBA Chatbot</h1>
+    <div id="chatbox">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        function sendMessage() {
+            let userMessage = $('#user-input').val();
+            $('#chat-log').append('<div><b>You:</b> ' + userMessage + '</div>');
+            $.get('/get-response/', {message: userMessage}, function(data) {
+                $('#chat-log').append('<div><b>Bot:</b> ' + data.response + '</div>');
+                $('#user-input').val('');
+            });
+        }
+    </script>
+</body>
+</html>
