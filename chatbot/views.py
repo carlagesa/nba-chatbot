@@ -1,4 +1,4 @@
-from django.shortcuts import render
+# chatbot/views.py
 from django.shortcuts import render
 from django.http import JsonResponse
 from .utils import get_openai_response, get_live_score, get_player_stats
