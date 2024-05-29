@@ -17,22 +17,22 @@ def get_live_score(team_name):
     team_id = get_team_id(team_name)
     if not team_id:
         return "Team not found."
-    
+
     gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=team_id)
     games = gamefinder.get_dict()['resultSets'][0]['rowSet']
     if not games:
         return "No games found for this team."
-    
+
     latest_game = games[0]
     return f"{latest_game[4]} vs {latest_game[6]}: {latest_game[21]} - {latest_game[22]}"
 
 def get_player_stats(player_name):
     from nba_api.stats.static import players
     player_dict = players.get_players()
-    player = [player for player in player_dict if player_name.lower() in player['full_name'].lower()]
+    player = [p for p in player_dict if player_name.lower() in p['full_name'].lower()]
     if not player:
         return "Player not found."
-    
+
     player_id = player[0]['id']
     career = playercareerstats.PlayerCareerStats(player_id=player_id)
     career_stats = career.get_dict()
